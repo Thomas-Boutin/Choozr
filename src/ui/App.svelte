@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Router, Link, Route } from "svelte-routing";
+  import { Router, Route } from "svelte-routing";
   import Login from "./Login.svelte";
   import Test from "./Test.svelte";
 
