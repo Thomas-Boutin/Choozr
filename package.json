@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv docs --no-clear --single",
+    "start": "sirv docs --no-clear",
     "test": "jest",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
@@ -28,6 +28,6 @@
   },
   "dependencies": {
     "sirv-cli": "^2.0.0",
-    "svelte-routing": "^1.6.0"
+    "svelte-spa-router": "^3.2.0"
   }
 }

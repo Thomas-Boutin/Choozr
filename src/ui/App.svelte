@@ -1,12 +1,21 @@
 <script lang="ts">
-  import { Router, Route } from "svelte-routing";
+  import { setContext } from "svelte";
+  import Router, { push } from "svelte-spa-router";
+  import AuthenticationService from "../port/AuthenticationService";
   import Login from "./Login.svelte";
   import Test from "./Test.svelte";
 
-  export let url = "";
+  const routes = {
+    "/": Login,
+    "/test": Test,
+  };
+  setContext("loginUseCase", new AuthenticationService());
+
+  function handleRouteEvent(event: CustomEvent) {
+    if (event.detail.login == "logged") {
+      push("/test");
+    }
+  }
 </script>
 
-<Router {url}>
-  <Route path="about" component={Test} />
-  <Route path="/"><Login /></Route>
-</Router>
+<Router {routes} on:routeEvent={handleRouteEvent} />
