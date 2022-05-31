@@ -1,4 +1,4 @@
-import InMemoryLoginParametersRepository from "../adapter/output/InMemoryLoginParametersRepository";
+import InMemoryLoginParametersOutputAdapter from "../adapter/output/InMemoryLoginParametersOutputAdapter";
 import LoginParameters from "../domain/LoginParameters";
 import AuthenticationService from "../port/AuthenticationService";
 import type LoginUseCase from "../port/input/LoginUseCase";
@@ -6,10 +6,9 @@ import type LoginUseCase from "../port/input/LoginUseCase";
 describe('login', () => {
 
     it('should store the given login parameters', () => {
-        const inMemoryLoginParametersRepository = new InMemoryLoginParametersRepository()
+        const inMemoryLoginParametersRepository = new InMemoryLoginParametersOutputAdapter()
         const loginUseCase: LoginUseCase = new AuthenticationService(
             inMemoryLoginParametersRepository,
-            inMemoryLoginParametersRepository
         )
         loginUseCase.login(new LoginParameters("appId", "apiKey"))
 

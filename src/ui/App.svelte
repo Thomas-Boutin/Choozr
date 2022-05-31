@@ -1,7 +1,7 @@
 <script lang="ts">
   import { setContext } from "svelte";
   import Router, { push } from "svelte-spa-router";
-  import InMemoryLoginParametersRepository from "../adapter/output/InMemoryLoginParametersRepository";
+  import InMemoryLoginParametersRepository from "../adapter/output/InMemoryLoginParametersOutputAdapter";
   import AuthenticationService from "../port/AuthenticationService";
   import type GetLoginParametersPort from "../port/output/GetLoginParametersPort";
   import Login from "./Login.svelte";
