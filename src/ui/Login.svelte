@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher, getContext } from "svelte";
-import LoginParameters from "../domain/LoginParameters";
-import type LoginUseCase from "../port/input/LoginUseCase";
+  import LoginParameters from "../domain/LoginParameters";
+  import type LoginUseCase from "../port/input/LoginUseCase";
 
   let appId = "";
   let apiKey = "";
@@ -10,7 +10,7 @@ import type LoginUseCase from "../port/input/LoginUseCase";
 
   function valider() {
     loginUseCase.login(new LoginParameters(appId, apiKey));
-    dispatch("routeEvent", {login: "logged"})
+    dispatch("routeEvent", { login: "logged" });
   }
 </script>
 

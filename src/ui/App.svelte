@@ -5,7 +5,7 @@
   import AuthenticationService from "../port/AuthenticationService";
   import type GetLoginParametersPort from "../port/output/GetLoginParametersPort";
   import Login from "./Login.svelte";
-  import Test from "./Test.svelte";
+  import Test from "./Home.svelte";
 
   const routes = {
     "/": Login,
@@ -18,7 +18,6 @@
     "loginUseCase",
     new AuthenticationService(
       inMemoryLoginParamersRepository,
-      inMemoryLoginParamersRepository
     )
   );
 
