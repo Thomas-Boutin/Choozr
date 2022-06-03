@@ -2,7 +2,7 @@
   import { createEventDispatcher, getContext } from "svelte";
   import LoginParameters from "../domain/LoginParameters";
   import type LoginUseCase from "../port/input/LoginUseCase";
-import { RouteEvent, RouteEventDetail } from "./RouteEvent";
+  import { RouteEvent, Logged } from "./RouteEvent";
 
   let appId = "";
   let apiKey = "";
@@ -11,13 +11,13 @@ import { RouteEvent, RouteEventDetail } from "./RouteEvent";
 
   function valider() {
     loginUseCase.login(new LoginParameters(appId, apiKey));
-    dispatch<RouteEvent>("routeEvent", RouteEventDetail.Logged);
+    dispatch<RouteEvent>("routeEvent", Logged);
   }
 </script>
 
 <main>
-  <input bind:value={appId} />
   <input bind:value={apiKey} />
+  <input bind:value={appId} />
   <button disabled={!appId || !apiKey} on:click={valider}>Valider</button>
 </main>
 

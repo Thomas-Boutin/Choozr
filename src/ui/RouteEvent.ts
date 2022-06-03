@@ -1,6 +1,7 @@
 export type RouteEvent = "routeEvent";
 
-export enum RouteEventDetail {
-    Logged,
-    ChoozrCreated,
-}
+export interface RouteEventDetail {};
+
+export const Logged = {} as RouteEventDetail;
+
+export const ChoozrCreated = {} as RouteEventDetail;

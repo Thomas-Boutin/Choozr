@@ -11,13 +11,13 @@ export default class FakeChoozrOutputAdapter implements CreateChoozrPort {
         this.initialChoozrNumberId = initialChoozrNumberId;
     }
 
-    createChoozrWith(choozrName: ChoozrName, _loginParameters: LoginParameters): Choozr {
+    createChoozrWith(choozrName: ChoozrName, _loginParameters: LoginParameters): Promise<Choozr> {
         const choozr = new Choozr(
             new ChoozrId(this.initialChoozrNumberId.toString()),
             choozrName
         );
         this.initialChoozrNumberId++;
 
-        return choozr;
+        return Promise.resolve(choozr);
     }
 }

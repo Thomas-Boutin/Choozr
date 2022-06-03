@@ -2,7 +2,7 @@
   import { createEventDispatcher, getContext } from "svelte";
   import ChoozrName from "../domain/ChoozrName";
   import type CreateChoozrUseCase from "../port/input/CreateChoozrUseCase";
-  import { RouteEvent, RouteEventDetail } from "./RouteEvent";
+  import { RouteEvent, ChoozrCreated } from "./RouteEvent";
 
   const createChoozrUseCase: CreateChoozrUseCase = getContext(
     "createChoozrUseCase"
@@ -11,8 +11,10 @@
   let choozrName = "";
 
   function createChoozr() {
-    createChoozrUseCase.createChoozrWith(new ChoozrName(choozrName));
-    dispatch<RouteEvent>("routeEvent", RouteEventDetail.ChoozrCreated);
+    createChoozrUseCase
+      .createChoozrWith(new ChoozrName(choozrName))
+      .then(() => dispatch<RouteEvent>("routeEvent", ChoozrCreated))
+      .catch((err) => console.log(err));
   }
 </script>
 
