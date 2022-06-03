@@ -5,9 +5,9 @@ import ChoozrService from "../port/ChoozrService";
 import type CreateChoozrUseCase from "../port/input/CreateChoozrUseCase";
 import FakeChoozrOutputAdapter from "../__tests-commons__/FakeChoozrOutputAdapter";
 
-describe('create choozr', () => {
+describe("create choozr", () => {
 
-    it('should create a choozr with a given name', () => {
+    it("should create a choozr with a given name", () => {
         const fakeChoozrOutputAdapter = new FakeChoozrOutputAdapter(0)
         const createChoozrUseCase: CreateChoozrUseCase = new ChoozrService(
             fakeChoozrOutputAdapter,

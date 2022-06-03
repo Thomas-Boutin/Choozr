@@ -6,6 +6,7 @@
   import type GetLoginParametersPort from "../port/output/GetLoginParametersPort";
   import Login from "./Login.svelte";
   import Test from "./Home.svelte";
+  import { RouteEventDetail } from "./RouteEvent";
 
   const routes = {
     "/": Login,
@@ -16,14 +17,12 @@
 
   setContext(
     "loginUseCase",
-    new AuthenticationService(
-      inMemoryLoginParamersRepository,
-    )
+    new AuthenticationService(inMemoryLoginParamersRepository)
   );
 
-  function handleRouteEvent(event: CustomEvent) {
-    if (event.detail.login == "logged") {
-      push("/test");
+  async function handleRouteEvent(event: CustomEvent<RouteEventDetail>) {
+    if (event.detail == RouteEventDetail.Logged) {
+      await push("/test");
     }
   }
 </script>

@@ -1,6 +1,7 @@
 import Choozr from "../domain/Choozr";
 import ChoozrId from "../domain/ChoozrId";
 import type ChoozrName from "../domain/ChoozrName";
+import type LoginParameters from "../domain/LoginParameters";
 import type CreateChoozrPort from "../port/output/CreateChoozrPort";
 
 export default class FakeChoozrOutputAdapter implements CreateChoozrPort {
@@ -10,12 +11,12 @@ export default class FakeChoozrOutputAdapter implements CreateChoozrPort {
         this.initialChoozrNumberId = initialChoozrNumberId;
     }
 
-    createChoozrWith(choozrName: ChoozrName): Choozr {
+    createChoozrWith(choozrName: ChoozrName, _loginParameters: LoginParameters): Choozr {
         const choozr = new Choozr(
             new ChoozrId(this.initialChoozrNumberId.toString()),
             choozrName
-        )
-        this.initialChoozrNumberId++
+        );
+        this.initialChoozrNumberId++;
 
         return choozr;
     }

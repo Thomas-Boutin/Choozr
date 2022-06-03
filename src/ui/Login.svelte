@@ -2,6 +2,7 @@
   import { createEventDispatcher, getContext } from "svelte";
   import LoginParameters from "../domain/LoginParameters";
   import type LoginUseCase from "../port/input/LoginUseCase";
+import { RouteEvent, RouteEventDetail } from "./RouteEvent";
 
   let appId = "";
   let apiKey = "";
@@ -10,7 +11,7 @@
 
   function valider() {
     loginUseCase.login(new LoginParameters(appId, apiKey));
-    dispatch("routeEvent", { login: "logged" });
+    dispatch<RouteEvent>("routeEvent", RouteEventDetail.Logged);
   }
 </script>
 
