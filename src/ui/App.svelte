@@ -8,6 +8,8 @@
   import { ChoozrCreated, Logged, RouteEventDetail } from "./RouteEvent";
   import ChoozrService from "../port/ChoozrService";
   import RESTChoozrOutputAdapter from "../adapter/output/RESTChoozrOutputAdapter";
+  import TeamService from "../port/TeamService";
+  import RESTTeamOutputAdapter from "../adapter/output/RESTTeamOutputAdapter";
 
   const routes = {
     "/": Login,
@@ -16,6 +18,7 @@
   const inMemoryLoginParamersRepository =
     new InMemoryLoginParametersRepository();
   const restChoozrOutputAdapter = new RESTChoozrOutputAdapter();
+  const restTeamOutputAdapter = new RESTTeamOutputAdapter();
 
   setContext(
     "loginUseCase",
@@ -24,6 +27,10 @@
   setContext(
     "createChoozrUseCase",
     new ChoozrService(restChoozrOutputAdapter, inMemoryLoginParamersRepository)
+  );
+  setContext(
+    "createTeamUseCase",
+    new TeamService(restTeamOutputAdapter, inMemoryLoginParamersRepository)
   );
 
   async function handleRouteEvent(event: CustomEvent<RouteEventDetail>) {

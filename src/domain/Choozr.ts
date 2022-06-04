@@ -1,5 +1,5 @@
-import type ChoozrId from './ChoozrId';
-import type ChoozrName from './ChoozrName';
+import type ChoozrId from "./ChoozrId";
+import type ChoozrName from "./ChoozrName";
 
 export default class Choozr {
     id: ChoozrId;
