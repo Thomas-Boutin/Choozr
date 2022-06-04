@@ -12,7 +12,6 @@
   const createTeamUseCase: CreateTeamUseCase = getContext("createTeamUseCase");
   const dispatch = createEventDispatcher();
   let teamName = "";
-  
 
   function createTeam() {
     createTeamUseCase

@@ -3,6 +3,7 @@
   import LoginParameters from "../domain/LoginParameters";
   import type LoginUseCase from "../port/input/LoginUseCase";
   import { RouteEvent, Logged } from "./RouteEvent";
+  import QrCode from "svelte-qrcode";
 
   let appId = "";
   let apiKey = "";
@@ -16,6 +17,7 @@
 </script>
 
 <main>
+  <QrCode value="https://thomas-boutin.github.io/Choozr/teams/recyR5KcJcNUGrHFV/join" />
   <input bind:value={apiKey} />
   <input bind:value={appId} />
   <button disabled={!appId || !apiKey} on:click={valider}>Valider</button>
