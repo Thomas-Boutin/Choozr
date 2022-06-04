@@ -17,7 +17,7 @@
 </script>
 
 <main>
-  <QrCode value="https://thomas-boutin.github.io/Choozr/teams/recyR5KcJcNUGrHFV/join" />
+  <QrCode value="https://thomas-boutin.github.io/Choozr/#/teams/recyR5KcJcNUGrHFV/join" />
   <input bind:value={apiKey} />
   <input bind:value={appId} />
   <button disabled={!appId || !apiKey} on:click={valider}>Valider</button>
