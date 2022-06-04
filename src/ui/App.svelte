@@ -4,14 +4,14 @@
   import InMemoryLoginParametersRepository from "../adapter/output/InMemoryLoginParametersOutputAdapter";
   import AuthenticationService from "../port/AuthenticationService";
   import Login from "./Login.svelte";
-  import Test from "./Home.svelte";
-  import { Logged, RouteEventDetail } from "./RouteEvent";
+  import Home from "./Home.svelte";
+  import { ChoozrCreated, Logged, RouteEventDetail } from "./RouteEvent";
   import ChoozrService from "../port/ChoozrService";
   import RESTChoozrOutputAdapter from "../adapter/output/RESTChoozrOutputAdapter";
 
   const routes = {
     "/": Login,
-    "/test": Test,
+    "/home": Home,
   };
   const inMemoryLoginParamersRepository =
     new InMemoryLoginParametersRepository();
@@ -27,8 +27,12 @@
   );
 
   async function handleRouteEvent(event: CustomEvent<RouteEventDetail>) {
-    if (event.detail == Logged) {
-      await push("/test");
+    const eventDetail = event.detail;
+
+    if (eventDetail == Logged) {
+      await push("/home");
+    } else if (eventDetail instanceof ChoozrCreated) {
+      await push(`/choozr/${eventDetail.choozrId.value}`);
     }
   }
 </script>

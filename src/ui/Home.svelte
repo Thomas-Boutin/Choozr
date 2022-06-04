@@ -13,7 +13,7 @@
   function createChoozr() {
     createChoozrUseCase
       .createChoozrWith(new ChoozrName(choozrName))
-      .then(() => dispatch<RouteEvent>("routeEvent", ChoozrCreated))
+      .then((choozr) => dispatch<RouteEvent>("routeEvent", new ChoozrCreated(choozr.id)))
       .catch((err) => console.log(err));
   }
 </script>

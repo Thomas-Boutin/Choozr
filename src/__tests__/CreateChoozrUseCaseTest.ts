@@ -9,7 +9,7 @@ import FakeChoozrOutputAdapter from "../__tests-commons__/FakeChoozrOutputAdapte
 
 describe("create choozr", () => {
 
-    it("should create a choozr with a given name", () => {
+    it("should create a choozr with a given name", async () => {
         const fakeChoozrOutputAdapter = new FakeChoozrOutputAdapter(0);
         const inMemoryLoginParametersOutputAdapter = new InMemoryLoginParametersOutputAdapter();
         inMemoryLoginParametersOutputAdapter.store(new LoginParameters("appId", "apiKey"));
@@ -18,7 +18,7 @@ describe("create choozr", () => {
             inMemoryLoginParametersOutputAdapter
         );
 
-        const choozr = createChoozrUseCase.createChoozrWith(new ChoozrName("anniversaire"));
+        const choozr = await createChoozrUseCase.createChoozrWith(new ChoozrName("anniversaire"));
 
         expect(choozr).toEqual(
             new Choozr(
@@ -28,7 +28,7 @@ describe("create choozr", () => {
         );
     });
 
-    it("can't create a choozr if no login parameters are stored", () => {
+    it("can't create a choozr if no login parameters are stored", async () => {
         const fakeChoozrOutputAdapter = new FakeChoozrOutputAdapter(0);
         const inMemoryLoginParametersOutputAdapter = new InMemoryLoginParametersOutputAdapter();
         const createChoozrUseCase: CreateChoozrUseCase = new ChoozrService(
@@ -36,8 +36,6 @@ describe("create choozr", () => {
             inMemoryLoginParametersOutputAdapter
         );
 
-        expect(() => {
-            createChoozrUseCase.createChoozrWith(new ChoozrName("anniversaire"));
-        }).toThrow();
+       await expect(createChoozrUseCase.createChoozrWith(new ChoozrName("anniversaire"))).rejects.toThrow();
     });
 });
