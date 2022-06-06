@@ -1,4 +1,5 @@
 export default class TeamName {
+    __teamNameBrand: any;
     value: string;
 
     constructor(value: string) {

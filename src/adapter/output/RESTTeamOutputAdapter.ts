@@ -6,8 +6,14 @@ import type LoginParameters from "../../domain/LoginParameters";
 import type CreateTeamPort from "../../port/output/CreateTeamPort";
 import ChoozrId from "../../domain/ChoozrId";
 import type Record from "airtable/lib/record";
+import type GetTeamsMembersCountPort from "../../port/output/GetTeamsMembersCountPort";
+import type TeamMembersCount from "../../domain/TeamMembersCount";
 
-export default class RESTTeamOutputAdapter implements CreateTeamPort {
+export default class RESTTeamOutputAdapter implements CreateTeamPort, GetTeamsMembersCountPort {
+    async getTeamsMembersCount(): Promise<TeamMembersCount[]> {
+        return Promise.resolve([]);
+    }
+
     async createTeamWith(choozrId: ChoozrId, teamName: TeamName, loginParameters: LoginParameters): Promise<Team> {
         const airtable = new Airtable({ apiKey: loginParameters.apiKey }).base(loginParameters.appId);
         const records = await airtable("Team").create([

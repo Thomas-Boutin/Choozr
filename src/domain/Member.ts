@@ -7,7 +7,7 @@ export default class Member {
     name: MemberName;
     teamId: TeamId;
 
-    constructor(id: MemberId, name: MemberName, teamId: MemberId) {
+    constructor(id: MemberId, name: MemberName, teamId: TeamId) {
         this.id = id;
         this.name = name;
         this.teamId = teamId;

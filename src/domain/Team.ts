@@ -2,7 +2,7 @@ import type ChoozrId from "./ChoozrId";
 import type TeamId from "./TeamId";
 import type TeamName from "./TeamName";
 
-export default class Choozr {
+export default class Team {
     id: TeamId;
     name: TeamName;
     choozrId: ChoozrId;

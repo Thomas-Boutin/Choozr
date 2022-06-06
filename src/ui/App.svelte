@@ -5,7 +5,7 @@
   import AuthenticationService from "../port/AuthenticationService";
   import Login from "./Login.svelte";
   import Home from "./Home.svelte";
-  import JoinTeam from "./JoinTeam.svelte";
+  import JoinTeam from "./JoinChoozr.svelte";
   import { ChoozrCreated, Logged, RouteEventDetail } from "./RouteEvent";
   import ChoozrService from "../port/ChoozrService";
   import RESTChoozrOutputAdapter from "../adapter/output/RESTChoozrOutputAdapter";
@@ -40,8 +40,12 @@
     new TeamService(restTeamOutputAdapter, inMemoryLoginParamersRepository)
   );
   setContext(
-    "joinTeamUseCase",
-    new MemberService(restMemberOutputAdapter, inMemoryLoginParamersRepository)
+    "joinChoozrUseCase",
+    new MemberService(
+      restMemberOutputAdapter,
+      inMemoryLoginParamersRepository,
+      restTeamOutputAdapter
+    )
   );
 
   async function handleRouteEvent(event: CustomEvent<RouteEventDetail>) {
