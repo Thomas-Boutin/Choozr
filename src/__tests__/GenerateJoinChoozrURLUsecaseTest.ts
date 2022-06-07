@@ -22,7 +22,7 @@ describe("generate an URL to join a choozr", () => {
 
         expect(url).toEqual(
             new JoinChoozrURL(
-                "https://thomas-boutin.github.io/Choozr/#/choozrId?appId=appId&apiKey=apiKey"
+                "https://thomas-boutin.github.io/Choozr/#/choozrs/choozrId/join?appId=appId&apiKey=apiKey"
             )
         );
     });
@@ -41,7 +41,7 @@ describe("generate an URL to join a choozr", () => {
 
         expect(url).toEqual(
             new JoinChoozrURL(
-                "https://thomas-boutin.github.io/Choozr/#/choozrId?appId=appId2&apiKey=apiKey"
+                "https://thomas-boutin.github.io/Choozr/#/choozrs/choozrId/join?appId=appId2&apiKey=apiKey"
             )
         );
     });
@@ -60,7 +60,7 @@ describe("generate an URL to join a choozr", () => {
 
         expect(url).toEqual(
             new JoinChoozrURL(
-                "https://thomas-boutin.github.io/Choozr/#/choozrId?appId=appId&apiKey=apiKey2"
+                "https://thomas-boutin.github.io/Choozr/#/choozrs/choozrId/join?appId=appId&apiKey=apiKey2"
             )
         );
     });
