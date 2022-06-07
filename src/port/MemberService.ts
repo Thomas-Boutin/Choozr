@@ -23,7 +23,7 @@ export default class MemberService implements JoinChoozrUseCase {
 
     async createMemberWith(choozrId: ChoozrId, memberName: MemberName): Promise<Member> {
         const loginParameters = this.getLoginParametersPort.getLoginParameters();
-        const teamsMembersCount = await this.getTeamsMembersCountPort.getTeamsMembersCountFrom(choozrId);
+        const teamsMembersCount = await this.getTeamsMembersCountPort.getTeamsMembersCountFrom(choozrId, loginParameters);
         teamsMembersCount.sort((a, b) => a.membersCount - b.membersCount); 
 
         return await this.joinTeamPort.createMemberWith(teamsMembersCount[0].teamId, memberName, loginParameters);

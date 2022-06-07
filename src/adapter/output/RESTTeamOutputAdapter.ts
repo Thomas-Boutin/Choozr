@@ -7,11 +7,16 @@ import type CreateTeamPort from "../../port/output/CreateTeamPort";
 import ChoozrId from "../../domain/ChoozrId";
 import type Record from "airtable/lib/record";
 import type GetTeamsMembersCountPort from "../../port/output/GetTeamsMembersCountPort";
-import type TeamMembersCount from "../../domain/TeamMembersCount";
+import TeamMembersCount from "../../domain/TeamMembersCount";
 
 export default class RESTTeamOutputAdapter implements CreateTeamPort, GetTeamsMembersCountPort {
-    async getTeamsMembersCountFrom(): Promise<TeamMembersCount[]> {
-        return Promise.resolve([]);
+    async getTeamsMembersCountFrom(choozrId: ChoozrId, loginParameters: LoginParameters): Promise<TeamMembersCount[]> {
+        const airtable = new Airtable({ apiKey: loginParameters.apiKey }).base(loginParameters.appId);
+        const records = await airtable("Team").select({
+            filterByFormula: `{id (from Choozr)} = ${choozrId.value}`
+        }).firstPage();
+
+        return records.map(this.recordToTeamMembersCount);
     }
 
     async createTeamWith(choozrId: ChoozrId, teamName: TeamName, loginParameters: LoginParameters): Promise<Team> {
@@ -35,6 +40,13 @@ export default class RESTTeamOutputAdapter implements CreateTeamPort, GetTeamsMe
             new TeamId(record.id),
             new TeamName(record.get("name") as string),
             new ChoozrId(record.get("id (from Choozr)") as string)
+        );
+    };
+
+    private recordToTeamMembersCount = (record: Record<FieldSet>): TeamMembersCount => {
+        return new TeamMembersCount(
+            new TeamId(record.id),
+            record.get("membersCount") as number
         );
     };
 }
