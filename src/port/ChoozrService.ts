@@ -23,9 +23,8 @@ export default class ChoozrService implements CreateChoozrUseCase, GenerateJoinC
         const loginParameters = this.getLoginParametersPort.getLoginParameters();
 
         return Promise.resolve(new JoinChoozrURL(
-            `https://thomas-boutin.github.io/Choozr/${choozrId.value}?appId=${loginParameters.appId}&apiKey=${loginParameters.apiKey}`
-        )
-        );
+            `https://thomas-boutin.github.io/Choozr/#/${choozrId.value}?appId=${loginParameters.appId}&apiKey=${loginParameters.apiKey}`
+        ));
     }
 
     async createChoozrWith(choozrName: ChoozrName): Promise<Choozr> {
