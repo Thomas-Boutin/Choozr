@@ -13,7 +13,7 @@ export default class RESTTeamOutputAdapter implements CreateTeamPort, GetTeamsMe
     async getTeamsMembersCountFrom(choozrId: ChoozrId, loginParameters: LoginParameters): Promise<TeamMembersCount[]> {
         const airtable = new Airtable({ apiKey: loginParameters.apiKey }).base(loginParameters.appId);
         const records = await airtable("Team").select({
-            filterByFormula: `{id (from Choozr)} = ${choozrId.value}`
+            filterByFormula: `{id (from Choozr)} = '${choozrId.value}'`
         }).firstPage();
 
         return records.map(this.recordToTeamMembersCount);
