@@ -10,7 +10,7 @@ import type GetTeamsMembersCountPort from "../../port/output/GetTeamsMembersCoun
 import type TeamMembersCount from "../../domain/TeamMembersCount";
 
 export default class RESTTeamOutputAdapter implements CreateTeamPort, GetTeamsMembersCountPort {
-    async getTeamsMembersCount(): Promise<TeamMembersCount[]> {
+    async getTeamsMembersCountFrom(): Promise<TeamMembersCount[]> {
         return Promise.resolve([]);
     }
 

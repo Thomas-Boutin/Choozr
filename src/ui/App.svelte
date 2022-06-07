@@ -5,7 +5,6 @@
   import AuthenticationService from "../port/AuthenticationService";
   import Login from "./Login.svelte";
   import Home from "./Home.svelte";
-  import JoinTeam from "./JoinChoozr.svelte";
   import { ChoozrCreated, Logged, RouteEventDetail } from "./RouteEvent";
   import ChoozrService from "../port/ChoozrService";
   import RESTChoozrOutputAdapter from "../adapter/output/RESTChoozrOutputAdapter";
@@ -14,27 +13,30 @@
   import Choozr from "./Choozr.svelte";
   import MemberService from "../port/MemberService";
   import RESTMemberOutputAdapter from "../adapter/output/RESTMemberOutputAdapter";
+  import JoinChoozr from "./JoinChoozr.svelte";
 
   const routes = {
     "/": Login,
     "/home": Home,
     "/choozrs/:choozrId": Choozr,
-    "/teams/:teamId/join": JoinTeam,
+    "/choozrs/:choozrId/join": JoinChoozr,
   };
   const inMemoryLoginParamersRepository =
     new InMemoryLoginParametersRepository();
   const restChoozrOutputAdapter = new RESTChoozrOutputAdapter();
   const restTeamOutputAdapter = new RESTTeamOutputAdapter();
   const restMemberOutputAdapter = new RESTMemberOutputAdapter();
+  const choozrService = new ChoozrService(
+    restChoozrOutputAdapter,
+    inMemoryLoginParamersRepository
+  );
 
   setContext(
     "loginUseCase",
     new AuthenticationService(inMemoryLoginParamersRepository)
   );
-  setContext(
-    "createChoozrUseCase",
-    new ChoozrService(restChoozrOutputAdapter, inMemoryLoginParamersRepository)
-  );
+  setContext("createChoozrUseCase", choozrService);
+  setContext("generateJoinChoozrURLUseCase", choozrService);
   setContext(
     "createTeamUseCase",
     new TeamService(restTeamOutputAdapter, inMemoryLoginParamersRepository)

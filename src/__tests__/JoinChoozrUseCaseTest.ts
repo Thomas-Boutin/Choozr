@@ -27,7 +27,7 @@ describe("join Choozr", () => {
             fakeTeamOutputAdapter
         );
 
-        const member = await joinTeamUseCase.createMemberWith(new ChoozrId("choozrId"), new MemberName("anniversaire"));
+        const member = await joinTeamUseCase.createMemberWith(new ChoozrId("0"), new MemberName("anniversaire"));
 
         expect(member).toEqual(
             new Member(
@@ -49,5 +49,30 @@ describe("join Choozr", () => {
         );
 
         await expect(joinTeamUseCase.createMemberWith(new ChoozrId("teamId"), new MemberName("anniversaire"))).rejects.toThrow();
+    });
+
+    it("join a team which matches the given choozrId", async () => {
+        const fakeMemberOutputAdapter = new FakeMemberOutputAdapter(0);
+        const inMemoryLoginParametersOutputAdapter = new InMemoryLoginParametersOutputAdapter();
+        const fakeTeamOutputAdapter = new FakeTeamOutputAdapter(0);
+        const loginParameters = new LoginParameters("appId", "apiKey");
+        inMemoryLoginParametersOutputAdapter.store(loginParameters);
+        await fakeTeamOutputAdapter.createTeamWith(new ChoozrId("0"), new TeamName("team"), loginParameters);
+        await fakeTeamOutputAdapter.createTeamWith(new ChoozrId("choozrId"), new TeamName("team2"), loginParameters);
+        const joinTeamUseCase: JoinChoozrUseCase = new MemberService(
+            fakeMemberOutputAdapter,
+            inMemoryLoginParametersOutputAdapter,
+            fakeTeamOutputAdapter
+        );
+
+        const member = await joinTeamUseCase.createMemberWith(new ChoozrId("choozrId"), new MemberName("anniversaire"));
+
+        expect(member).toEqual(
+            new Member(
+                new MemberId("0"),
+                new MemberName("anniversaire"),
+                new TeamId("1")
+            )
+        );
     });
 });
