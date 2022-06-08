@@ -14,7 +14,7 @@ export default class RESTMemberOutputAdapter implements JoinTeamPort {
             {
                 "fields": {
                     "name": memberName.value,
-                    "Team": [
+                    "team": [
                         teamId.value
                     ]
                 }
