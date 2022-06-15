@@ -28,7 +28,7 @@ module.exports = {
     "svelte3/ignore-styles": () => true,
   },
   plugins: ["svelte3", "@typescript-eslint"],
-  ignorePatterns: ["node_modules", ".eslintrc.js", "jest.config.js"],
+  ignorePatterns: ["node_modules", ".eslintrc.js", "jest.config.js", "rollup.config.js"],
   rules: {
     quotes: "off",
     "@typescript-eslint/quotes": ["error"],

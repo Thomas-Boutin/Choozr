@@ -1,0 +1,10 @@
+$primary: #590696;
+$body-family: 'Bodo Amat';
+
+@import "bulma/bulma";
+
+@font-face {
+    font-family: 'Bodo Amat';
+    src: url('/Bodo-Amat.ttf') format("truetype");
+}
+

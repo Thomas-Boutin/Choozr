@@ -15,23 +15,15 @@
   }
 </script>
 
-<main>
-  <input bind:value={apiKey} />
-  <input bind:value={appId} />
-  <button disabled={!appId || !apiKey} on:click={valider}>Valider</button>
-</main>
-
-<style>
-  main {
-    text-align: center;
-    padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
-  }
-
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
-    }
-  }
-</style>
+<section class="hero is-primary is-fullheight">
+  <div class="hero-body is-flex is-justify-content-center">
+    <div class="is-flex is-flex-direction-column">
+      <h1 class="is-size-1 mb-5 has-text-centered">Login</h1>
+      <h2>Api Key</h2>
+      <input class="mt-1" bind:value={apiKey} type="password" />
+      <h2 class="mt-2">App Id</h2>
+      <input class="mt-1" bind:value={appId} type="password" />
+      <button class="mt-4" disabled={!appId || !apiKey} on:click={valider}>Valider</button>
+    </div>
+  </div>
+</section>

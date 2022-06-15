@@ -18,7 +18,11 @@
   }
 </script>
 
-<main>
-  <input bind:value={choozrName} />
-  <button disabled={!choozrName} on:click={createChoozr}>Créer</button>
-</main>
+<section class="hero is-danger is-fullheight">
+    <input bind:value={choozrName} />
+    <button disabled={!choozrName} on:click={createChoozr}>Créer</button>
+</section>
+
+<style lang="scss">
+
+</style>

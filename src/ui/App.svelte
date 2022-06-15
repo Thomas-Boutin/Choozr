@@ -62,3 +62,7 @@
 </script>
 
 <Router {routes} on:routeEvent={handleRouteEvent} />
+
+<style lang="scss" global>
+  @import "app.scss";
+</style>
