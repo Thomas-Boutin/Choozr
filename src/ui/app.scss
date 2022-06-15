@@ -1,5 +1,10 @@
 $primary: #590696;
+$info: #F32424;
+$secondary: #FBCB0A;
+$light: #F2F2F2;
 $body-family: 'Bodo Amat';
+$table-row-hover-background-color: $secondary;
+$table-striped-row-even-hover-background-color: $secondary;
 
 @import "bulma/bulma";
 
@@ -7,4 +12,3 @@ $body-family: 'Bodo Amat';
     font-family: 'Bodo Amat';
     src: url('/Bodo-Amat.ttf') format("truetype");
 }
-

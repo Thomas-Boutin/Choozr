@@ -16,6 +16,7 @@ describe("generate an URL to join a choozr", () => {
         const generateJoinChoozrURLUseCase: GenerateJoinChoozrURLUseCase = new ChoozrService(
             fakeChoozrOutputAdapter,
             inMemoryLoginParametersOutputAdapter,
+            fakeChoozrOutputAdapter
         );
 
         const url = await generateJoinChoozrURLUseCase.generateJoinChoozrURLWith(new ChoozrId("choozrId"));
@@ -35,6 +36,7 @@ describe("generate an URL to join a choozr", () => {
         const generateJoinChoozrURLUseCase: GenerateJoinChoozrURLUseCase = new ChoozrService(
             fakeChoozrOutputAdapter,
             inMemoryLoginParametersOutputAdapter,
+            fakeChoozrOutputAdapter,
         );
 
         const url = await generateJoinChoozrURLUseCase.generateJoinChoozrURLWith(new ChoozrId("choozrId"));
@@ -54,6 +56,7 @@ describe("generate an URL to join a choozr", () => {
         const generateJoinChoozrURLUseCase: GenerateJoinChoozrURLUseCase = new ChoozrService(
             fakeChoozrOutputAdapter,
             inMemoryLoginParametersOutputAdapter,
+            fakeChoozrOutputAdapter,
         );
 
         const url = await generateJoinChoozrURLUseCase.generateJoinChoozrURLWith(new ChoozrId("choozrId"));

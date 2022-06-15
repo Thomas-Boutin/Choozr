@@ -15,6 +15,14 @@ export class ChoozrCreated implements RouteEventDetail {
     }
 };
 
+export class ChoozrClicked implements RouteEventDetail {
+    readonly choozrId: ChoozrId;
+
+    constructor(choozrId: ChoozrId) {
+        this.choozrId = choozrId;
+    }
+};
+
 export class TeamCreated implements RouteEventDetail {
     readonly teamId: TeamId;
 

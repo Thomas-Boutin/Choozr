@@ -20,9 +20,9 @@
     <div class="is-flex is-flex-direction-column">
       <h1 class="is-size-1 mb-5 has-text-centered">Login</h1>
       <h2>Api Key</h2>
-      <input class="mt-1" bind:value={apiKey} type="password" />
+      <input id="api-key" class="mt-1" bind:value={apiKey} type="password" />
       <h2 class="mt-2">App Id</h2>
-      <input class="mt-1" bind:value={appId} type="password" />
+      <input id="app-id" class="mt-1" bind:value={appId} type="password" />
       <button class="mt-4" disabled={!appId || !apiKey} on:click={valider}>Valider</button>
     </div>
   </div>

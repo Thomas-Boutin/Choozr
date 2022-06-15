@@ -22,8 +22,8 @@ import type TeamDetails from "../domain/TeamDetails";
   function getTeamDetails() {
     getTeamDetailsUseCase
       .getTeamDetailsBy(new TeamId(params.teamId))
-      .then((teamDetails: TeamDetails) => {
-        teamDetails = teamDetails;
+      .then((response: TeamDetails) => {
+        teamDetails = response;
       }).catch((err) => console.log(err));
   }
 </script>
