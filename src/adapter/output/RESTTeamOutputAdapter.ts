@@ -41,7 +41,7 @@ export default class RESTTeamOutputAdapter implements CreateTeamPort, GetTeamsMe
             {
                 "fields": {
                     "name": teamName.value,
-                    "Choozr": [
+                    "choozr": [
                         choozrId.value
                     ]
                 }

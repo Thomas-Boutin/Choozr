@@ -25,6 +25,7 @@
   let teamName = "";
   let joinChoozrURL = "";
   let isLoadingTeams = true;
+  let isCreatingTeam = false;
   let teams: Team[] = [];
 
   onMount(() => {
@@ -44,12 +45,14 @@
   });
 
   function createTeam() {
+    let isCreatingTeam = true;
     createTeamUseCase
       .createTeamWith(choozrId, new TeamName(teamName))
       .then((team) =>
         dispatch<RouteEvent>("routeEvent", new TeamCreated(team.id))
       )
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => (isCreatingTeam = false));
   }
 
   function onTeamClicked(id: TeamId) {
@@ -82,11 +85,17 @@
         </table>
       {/if}
       <hr />
-      <h2>Nouvelle Équipe</h2>
-      <input id="app-id" class="mt-1" bind:value={teamName} />
-      <button class="mt-4" disabled={!teamName} on:click={createTeam}>
-        Créer
-      </button>
+      {#if isCreatingTeam}
+        <div class="is-flex is-justify-content-center">
+          <Loader />
+        </div>
+      {:else}
+        <h2>Nouvelle Équipe</h2>
+        <input id="app-id" class="mt-1" bind:value={teamName} />
+        <button class="mt-4" disabled={!teamName} on:click={createTeam}>
+          Créer
+        </button>
+      {/if}
     </div>
   </div>
 </section>
