@@ -54,7 +54,6 @@
           id="app-id"
           class="mt-1"
           bind:value={memberName}
-          type="password"
         />
         <button class="mt-4" disabled={!memberName} on:click={joinChoozr}>
           Rejoindre

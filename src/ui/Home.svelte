@@ -67,7 +67,7 @@
       {/if}
       <hr />
       <h2>Nouveau Choozr</h2>
-      <input id="app-id" class="mt-1" bind:value={choozrName} type="password" />
+      <input id="app-id" class="mt-1" bind:value={choozrName} />
       <button class="mt-4" disabled={!choozrName} on:click={createChoozr}>
         Créer
       </button>

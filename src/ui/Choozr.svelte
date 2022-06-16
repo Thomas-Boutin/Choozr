@@ -40,7 +40,7 @@
         teams = choozrTeams;
       })
       .catch((err) => console.log(err))
-      .finally(() => isLoadingTeams = false);
+      .finally(() => (isLoadingTeams = false));
   });
 
   function createTeam() {
@@ -83,7 +83,7 @@
       {/if}
       <hr />
       <h2>Nouvelle Équipe</h2>
-      <input id="app-id" class="mt-1" bind:value={teamName} type="password" />
+      <input id="app-id" class="mt-1" bind:value={teamName} />
       <button class="mt-4" disabled={!teamName} on:click={createTeam}>
         Créer
       </button>
