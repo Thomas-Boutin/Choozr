@@ -25,15 +25,6 @@ export class ChoozrClicked implements RouteEventDetail {
     }
 };
 
-export class TeamCreated implements RouteEventDetail {
-    __teamCreatedBrand: any;
-    readonly teamId: TeamId;
-
-    constructor(teamId: TeamId) {
-        this.teamId = teamId;
-    }
-};
-
 export class TeamClicked implements RouteEventDetail {
     __teamClickedBrand: any;
     readonly teamId: TeamId;

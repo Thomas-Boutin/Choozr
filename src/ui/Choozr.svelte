@@ -4,7 +4,7 @@
   import TeamName from "../domain/TeamName";
   import type CreateTeamUseCase from "../port/input/CreateTeamUseCase";
   import type { ChoozrScreenParams } from "./ChoozrScreenParams";
-  import { RouteEvent, TeamClicked, TeamCreated } from "./RouteEvent";
+  import { RouteEvent, TeamClicked } from "./RouteEvent";
   import QrCode from "svelte-qrcode";
   import type GenerateJoinChoozrURLUseCase from "../port/input/GenerateJoinChoozrURLUseCase";
   import Loader from "./Loader.svelte";
@@ -29,12 +29,16 @@
   let teams: Team[] = [];
 
   onMount(() => {
+    getChoozrTeams();
     generateJoinChoozrURLUseCase
       .generateJoinChoozrURLWith(choozrId)
       .then((url) => {
         joinChoozrURL = url.value;
       })
       .catch((err) => console.log(err));
+  });
+
+  function getChoozrTeams() {
     getChoozrTeamsUseCase
       .getChoozrTeamsWith(choozrId)
       .then((choozrTeams) => {
@@ -42,15 +46,13 @@
       })
       .catch((err) => console.log(err))
       .finally(() => (isLoadingTeams = false));
-  });
+  }
 
   function createTeam() {
-    let isCreatingTeam = true;
+    isCreatingTeam = true;
     createTeamUseCase
       .createTeamWith(choozrId, new TeamName(teamName))
-      .then((team) =>
-        dispatch<RouteEvent>("routeEvent", new TeamCreated(team.id))
-      )
+      .then(() =>getChoozrTeams())
       .catch((err) => console.log(err))
       .finally(() => (isCreatingTeam = false));
   }

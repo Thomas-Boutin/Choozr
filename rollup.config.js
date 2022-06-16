@@ -40,7 +40,7 @@ export default {
     sourcemap: true,
     format: "iife",
     name: "app",
-    file: "docs/build/bundle3.js",
+    file: "docs/build/bundle4.js",
   },
   plugins: [
     svelte({
@@ -52,7 +52,7 @@ export default {
     }),
     // we'll extract any component CSS out into
     // a separate file - better for performance
-    css({ output: "bundle3.css" }),
+    css({ output: "bundle4.css" }),
 
     // If you have external dependencies installed from
     // npm, you'll most likely need these plugins. In
