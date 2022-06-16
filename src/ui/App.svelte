@@ -5,7 +5,7 @@
   import AuthenticationService from "../port/AuthenticationService";
   import Login from "./Login.svelte";
   import Home from "./Home.svelte";
-  import { ChoozrClicked, ChoozrCreated, Logged, RouteEventDetail } from "./RouteEvent";
+  import { ChoozrClicked, ChoozrCreated, Logged, RouteEventDetail, TeamJoined } from "./RouteEvent";
   import ChoozrService from "../port/ChoozrService";
   import RESTChoozrOutputAdapter from "../adapter/output/RESTChoozrOutputAdapter";
   import TeamService from "../port/TeamService";
@@ -33,6 +33,11 @@ import Team from "./Team.svelte";
     inMemoryLoginParamersRepository,
     restChoozrOutputAdapter,
   );
+  const teamService = new TeamService(
+    restTeamOutputAdapter,
+    inMemoryLoginParamersRepository,
+    restTeamOutputAdapter,
+  );
 
   setContext(
     "loginUseCase",
@@ -41,10 +46,8 @@ import Team from "./Team.svelte";
   setContext("createChoozrUseCase", choozrService);
   setContext("getChoozrsUseCase", choozrService);
   setContext("generateJoinChoozrURLUseCase", choozrService);
-  setContext(
-    "createTeamUseCase",
-    new TeamService(restTeamOutputAdapter, inMemoryLoginParamersRepository)
-  );
+  setContext("createTeamUseCase", teamService);
+  setContext("getTeamDetailsUseCase", teamService);
   setContext(
     "joinChoozrUseCase",
     new MemberService(
@@ -63,6 +66,8 @@ import Team from "./Team.svelte";
       await push(`/choozrs/${eventDetail.choozrId.value}`);
     } else if (eventDetail instanceof ChoozrClicked) {
       await push(`/choozrs/${eventDetail.choozrId.value}`);
+    } else if (eventDetail instanceof TeamJoined) {
+      await push(`/teams/${eventDetail.teamId.value}`);
     }
   }
 </script>

@@ -1,15 +1,15 @@
-import type ChoozrId from "./ChoozrId";
-import type Member from "./Member";
+import type MemberName from "./MemberName";
+import type TeamId from "./TeamId";
 import type TeamName from "./TeamName";
 
 export default class TeamDetails {
+    teamId: TeamId;
     name: TeamName;
-    choozrId: ChoozrId;
-    members: Member[];
+    membersNames: MemberName[];
 
-    constructor(name: TeamName, choozrId: ChoozrId, members: Member[]) {
+    constructor(teamId: TeamId, name: TeamName, membersNames: MemberName[]) {
+        this.teamId = teamId;
         this.name = name;
-        this.choozrId = choozrId;
-        this.members = members;
+        this.membersNames = membersNames;
     }
 }

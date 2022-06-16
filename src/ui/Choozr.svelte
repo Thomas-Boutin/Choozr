@@ -8,8 +8,8 @@
   import QrCode from "svelte-qrcode";
   import type GenerateJoinChoozrURLUseCase from "../port/input/GenerateJoinChoozrURLUseCase";
   import Loader from "./Loader.svelte";
-import type Team from "../domain/Team";
-import type TeamId from "../domain/TeamId";
+  import type Team from "../domain/Team";
+  import type TeamId from "../domain/TeamId";
 
   export let params: ChoozrScreenParams;
   const choozrId = new ChoozrId(params.choozrId);
@@ -41,9 +41,7 @@ import type TeamId from "../domain/TeamId";
       .catch((err) => console.log(err));
   }
 
-  function onTeamClicked(id: TeamId) {
-
-  }
+  function onTeamClicked(id: TeamId) {}
 </script>
 
 <section class="hero is-primary is-fullheight">
@@ -79,8 +77,3 @@ import type TeamId from "../domain/TeamId";
     </div>
   </div>
 </section>
-
-<main>
-  <input bind:value={teamName} />
-  <button disabled={!teamName} on:click={createTeam}>Créer</button>
-</main>

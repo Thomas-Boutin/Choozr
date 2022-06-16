@@ -7,13 +7,25 @@ import type ChoozrId from "../domain/ChoozrId";
 import type GetTeamsMembersCountPort from "../port/output/GetTeamsMembersCountPort";
 import TeamMembersCount from "../domain/TeamMembersCount";
 import FakeTeam from "./FakeTeam";
+import type GetTeamDetailsPort from "../port/output/GetTeamDetailsPort";
+import type TeamDetails from "../domain/TeamDetails";
 
-export default class FakeTeamOutputAdapter implements CreateTeamPort, GetTeamsMembersCountPort {
+export default class FakeTeamOutputAdapter implements CreateTeamPort, GetTeamsMembersCountPort, GetTeamDetailsPort {
     private initialTeamNumberId: number;
     private teams: FakeTeam[] = [];
+    private teamsDetails: TeamDetails[] = []; 
 
-    constructor(initialTeamNumberId: number) {
+    constructor(initialTeamNumberId: number = 0, teamsDetails: TeamDetails[] = []) {
         this.initialTeamNumberId = initialTeamNumberId;
+        this.teamsDetails = teamsDetails;
+    }
+
+    getTeamDetailsWith(teamId: TeamId, _loginParameters: LoginParameters): Promise<TeamDetails> {
+        const details = this.teamsDetails
+            .filter((teamDetails) => teamDetails.teamId.value == teamId.value)
+            [0];
+
+        return Promise.resolve(details);
     }
 
     getTeamsMembersCountFrom(choozrId: ChoozrId): Promise<TeamMembersCount[]> {
