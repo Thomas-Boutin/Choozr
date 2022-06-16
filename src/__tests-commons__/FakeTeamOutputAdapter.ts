@@ -9,21 +9,30 @@ import TeamMembersCount from "../domain/TeamMembersCount";
 import FakeTeam from "./FakeTeam";
 import type GetTeamDetailsPort from "../port/output/GetTeamDetailsPort";
 import type TeamDetails from "../domain/TeamDetails";
+import type GetChoozrTeamsPort from "../port/output/GetChoozrTeamsPort";
 
-export default class FakeTeamOutputAdapter implements CreateTeamPort, GetTeamsMembersCountPort, GetTeamDetailsPort {
+export default class FakeTeamOutputAdapter implements CreateTeamPort, GetTeamsMembersCountPort, GetTeamDetailsPort, GetChoozrTeamsPort {
     private initialTeamNumberId: number;
     private teams: FakeTeam[] = [];
-    private teamsDetails: TeamDetails[] = []; 
+    private teamsDetails: TeamDetails[] = [];
 
-    constructor(initialTeamNumberId: number = 0, teamsDetails: TeamDetails[] = []) {
+    constructor(initialTeamNumberId: number = 0, teamsDetails: TeamDetails[] = [], teams: FakeTeam[] = []) {
         this.initialTeamNumberId = initialTeamNumberId;
         this.teamsDetails = teamsDetails;
+        this.teams = teams;
+    }
+
+    getChoozrTeamsWith(choozrId: ChoozrId, loginParameters: LoginParameters): Promise<Team[]> {
+        const choozrTeams = this.teams
+            .filter((team) => team.choozrId.value == choozrId.value)
+            .map((team) => new Team(team.id, team.name, team.choozrId));
+        return Promise.resolve(choozrTeams);
     }
 
     getTeamDetailsWith(teamId: TeamId, _loginParameters: LoginParameters): Promise<TeamDetails> {
         const details = this.teamsDetails
             .filter((teamDetails) => teamDetails.teamId.value == teamId.value)
-            [0];
+        [0];
 
         return Promise.resolve(details);
     }

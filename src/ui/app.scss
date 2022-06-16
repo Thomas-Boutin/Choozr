@@ -1,14 +1,19 @@
 $primary: #590696;
-$info: #F32424;
-$secondary: #FBCB0A;
-$light: #F2F2F2;
-$body-family: 'Bodo Amat';
-$table-row-hover-background-color: $secondary;
-$table-striped-row-even-hover-background-color: $secondary;
+$info: #f32424;
+$secondary: #fbcb0a;
+$light: #f2f2f2;
+$body-family: "Bodo Amat";
 
 @import "bulma/bulma";
 
 @font-face {
-    font-family: 'Bodo Amat';
-    src: url('./Bodo-Amat.ttf') format("truetype");
+  font-family: "Bodo Amat";
+  src: url("./Bodo-Amat.ttf") format("truetype");
+}
+
+table.table.is-hoverable.is-striped tbody tr.is-clickable {
+  &:hover,
+  &:hover:nth-child(even) {
+    background-color: $secondary;
+  }
 }

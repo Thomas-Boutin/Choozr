@@ -38,15 +38,14 @@
         </div>
       {:else}
         <h1 class="is-size-1 has-text-centered mb-5">Équipe {teamDetails.name.value}</h1>
-        <hr />
         <table class="table is-striped is-hoverable">
           <thead>
-            <tr><th>Choozrs</th></tr>
+            <tr><th>Membres de l'équipe</th></tr>
           </thead>
           <tbody>
             {#each teamDetails.membersNames as memberName}
               <tr>
-                <td class="is-clickable">{memberName.value}</td>
+                <td>{memberName.value}</td>
               </tr>
             {/each}
           </tbody>

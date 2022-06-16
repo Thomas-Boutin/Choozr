@@ -1,4 +1,4 @@
-import Airtable, { FieldSet } from "airtable";
+import Airtable, { FieldSet, Records } from "airtable";
 import Team from "../../domain/Team";
 import TeamId from "../../domain/TeamId";
 import TeamName from "../../domain/TeamName";
@@ -11,8 +11,15 @@ import TeamMembersCount from "../../domain/TeamMembersCount";
 import type GetTeamDetailsPort from "../../port/output/GetTeamDetailsPort";
 import TeamDetails from "../../domain/TeamDetails";
 import MemberName from "../../domain/MemberName";
+import type GetChoozrTeamsPort from "../../port/output/GetChoozrTeamsPort";
 
-export default class RESTTeamOutputAdapter implements CreateTeamPort, GetTeamsMembersCountPort, GetTeamDetailsPort {
+export default class RESTTeamOutputAdapter implements CreateTeamPort, GetTeamsMembersCountPort, GetTeamDetailsPort, GetChoozrTeamsPort {
+    async getChoozrTeamsWith(choozrId: ChoozrId, loginParameters: LoginParameters): Promise<Team[]> {
+        const records = await this.fetchChoozrTeamsRecords(choozrId, loginParameters);
+
+        return records.map(this.recordToTeam);
+    }
+
     async getTeamDetailsWith(teamId: TeamId, loginParameters: LoginParameters): Promise<TeamDetails> {
         const airtable = new Airtable({ apiKey: loginParameters.apiKey }).base(loginParameters.appId);
         const records = await airtable("Team").select({
@@ -23,10 +30,7 @@ export default class RESTTeamOutputAdapter implements CreateTeamPort, GetTeamsMe
     }
 
     async getTeamsMembersCountFrom(choozrId: ChoozrId, loginParameters: LoginParameters): Promise<TeamMembersCount[]> {
-        const airtable = new Airtable({ apiKey: loginParameters.apiKey }).base(loginParameters.appId);
-        const records = await airtable("Team").select({
-            filterByFormula: `{id (from Choozr)} = '${choozrId.value}'`
-        }).firstPage();
+        const records = await this.fetchChoozrTeamsRecords(choozrId, loginParameters);
 
         return records.map(this.recordToTeamMembersCount);
     }
@@ -45,6 +49,14 @@ export default class RESTTeamOutputAdapter implements CreateTeamPort, GetTeamsMe
         ]);
 
         return records.map(this.recordToTeam)[0];
+    }
+
+    private async fetchChoozrTeamsRecords(choozrId: ChoozrId, loginParameters: LoginParameters): Promise<Records<FieldSet>> {
+        const airtable = new Airtable({ apiKey: loginParameters.apiKey }).base(loginParameters.appId);
+
+        return await airtable("Team").select({
+            filterByFormula: `{id (from Choozr)} = '${choozrId.value}'`
+        }).firstPage();
     }
 
     private recordToTeam = (record: Record<FieldSet>): Team => {

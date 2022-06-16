@@ -58,8 +58,8 @@
           </thead>
           <tbody>
             {#each choozrs as { id, name }}
-              <tr on:click={() => onChoozrClicked(id)}>
-                <td class="is-clickable">{name.value}</td>
+              <tr class="is-clickable" on:click={() => onChoozrClicked(id)}>
+                <td>{name.value}</td>
               </tr>
             {/each}
           </tbody>

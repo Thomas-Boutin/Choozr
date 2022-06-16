@@ -2,6 +2,8 @@ import Choozr from "../domain/Choozr";
 import ChoozrId from "../domain/ChoozrId";
 import type ChoozrName from "../domain/ChoozrName";
 import type LoginParameters from "../domain/LoginParameters";
+import type Team from "../domain/Team";
+import type GetChoozrTeamsUseCase from "../port/input/GetChoozrTeamsUseCase";
 import type CreateChoozrPort from "../port/output/CreateChoozrPort";
 import type GetChoozrsPort from "../port/output/GetChoozrsPort";
 

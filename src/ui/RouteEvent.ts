@@ -34,6 +34,15 @@ export class TeamCreated implements RouteEventDetail {
     }
 };
 
+export class TeamClicked implements RouteEventDetail {
+    __teamClickedBrand: any;
+    readonly teamId: TeamId;
+
+    constructor(teamId: TeamId) {
+        this.teamId = teamId;
+    }
+};
+
 export class TeamJoined implements RouteEventDetail {
     __teamJoinedBrand: any;
     readonly teamId: TeamId;

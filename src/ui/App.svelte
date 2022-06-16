@@ -5,7 +5,14 @@
   import AuthenticationService from "../port/AuthenticationService";
   import Login from "./Login.svelte";
   import Home from "./Home.svelte";
-  import { ChoozrClicked, ChoozrCreated, Logged, RouteEventDetail, TeamJoined } from "./RouteEvent";
+  import {
+    ChoozrClicked,
+    ChoozrCreated,
+    Logged,
+    RouteEventDetail,
+    TeamClicked,
+    TeamJoined,
+  } from "./RouteEvent";
   import ChoozrService from "../port/ChoozrService";
   import RESTChoozrOutputAdapter from "../adapter/output/RESTChoozrOutputAdapter";
   import TeamService from "../port/TeamService";
@@ -14,14 +21,14 @@
   import MemberService from "../port/MemberService";
   import RESTMemberOutputAdapter from "../adapter/output/RESTMemberOutputAdapter";
   import JoinChoozr from "./JoinChoozr.svelte";
-import Team from "./Team.svelte";
+  import Team from "./Team.svelte";
 
   const routes = {
     "/": Login,
     "/home": Home,
     "/choozrs/:choozrId": Choozr,
     "/choozrs/:choozrId/join": JoinChoozr,
-    "/teams/:teamId": Team
+    "/teams/:teamId": Team,
   };
   const inMemoryLoginParamersRepository =
     new InMemoryLoginParametersRepository();
@@ -32,11 +39,12 @@ import Team from "./Team.svelte";
     restChoozrOutputAdapter,
     inMemoryLoginParamersRepository,
     restChoozrOutputAdapter,
+    restTeamOutputAdapter
   );
   const teamService = new TeamService(
     restTeamOutputAdapter,
     inMemoryLoginParamersRepository,
-    restTeamOutputAdapter,
+    restTeamOutputAdapter
   );
 
   setContext(
@@ -46,8 +54,9 @@ import Team from "./Team.svelte";
   setContext("createChoozrUseCase", choozrService);
   setContext("getChoozrsUseCase", choozrService);
   setContext("generateJoinChoozrURLUseCase", choozrService);
-  setContext("createTeamUseCase", teamService);
+  setContext("getChoozrTeamsUseCase", choozrService);
   setContext("getTeamDetailsUseCase", teamService);
+  setContext("createTeamUseCase", teamService);
   setContext(
     "joinChoozrUseCase",
     new MemberService(
@@ -67,6 +76,8 @@ import Team from "./Team.svelte";
     } else if (eventDetail instanceof ChoozrClicked) {
       await push(`/choozrs/${eventDetail.choozrId.value}`);
     } else if (eventDetail instanceof TeamJoined) {
+      await push(`/teams/${eventDetail.teamId.value}`);
+    } else if (eventDetail instanceof TeamClicked) {
       await push(`/teams/${eventDetail.teamId.value}`);
     }
   }
