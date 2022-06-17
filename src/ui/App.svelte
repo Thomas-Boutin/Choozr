@@ -23,8 +23,8 @@
   import JoinChoozr from "./JoinChoozr.svelte";
   import Team from "./Team.svelte";
   import FirebaseChoozrOutputAdapter from "../adapter/output/FirebaseChoozrOutputAdapter";
-import FirebaseTeamOutputAdapter from "../adapter/output/FirebaseTeamOutputAdapter";
-import FirebaseMemberOutputAdapter from "../adapter/output/FirebaseMemberOutputAdapter";
+  import FirebaseTeamOutputAdapter from "../adapter/output/FirebaseTeamOutputAdapter";
+  import FirebaseMemberOutputAdapter from "../adapter/output/FirebaseMemberOutputAdapter";
 
   const routes = {
     "/": Login,
