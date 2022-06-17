@@ -5,7 +5,7 @@ import type LoginParameters from "../../domain/LoginParameters";
 import type JoinTeamPort from "../../port/output/JoinTeamPort";
 import type TeamId from "../../domain/TeamId";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, doc, runTransaction } from "firebase/firestore";
+import { getFirestore, doc, runTransaction, collection } from "firebase/firestore";
 import { app } from "./FirebaseInitializer";
 
 export default class FirebaseMemberOutputAdapter implements JoinTeamPort {
@@ -14,7 +14,7 @@ export default class FirebaseMemberOutputAdapter implements JoinTeamPort {
         await signInWithEmailAndPassword(auth, loginParameters.apiKey, loginParameters.appId);
         const db = getFirestore(app);
         const teamRef = doc(db, "Team", teamId.value);
-        const memberRef = doc(db, "Member");
+        const memberRef = doc(collection(db, "Member"));
 
         await runTransaction(db, async (transaction) => {
             const teamfDoc = await transaction.get(teamRef);
