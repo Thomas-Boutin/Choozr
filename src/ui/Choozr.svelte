@@ -52,7 +52,7 @@
     isCreatingTeam = true;
     createTeamUseCase
       .createTeamWith(choozrId, new TeamName(teamName))
-      .then(() =>getChoozrTeams())
+      .then(() => getChoozrTeams())
       .catch((err) => console.log(err))
       .finally(() => (isCreatingTeam = false));
   }
@@ -72,7 +72,8 @@
         <div class="is-flex is-justify-content-center">
           <Loader />
         </div>
-      {:else}
+        <hr />
+      {:else if teams.length > 0}
         <table class="table is-striped is-hoverable">
           <thead>
             <tr><th>Teams</th></tr>
@@ -85,8 +86,8 @@
             {/each}
           </tbody>
         </table>
+        <hr />
       {/if}
-      <hr />
       {#if isCreatingTeam}
         <div class="is-flex is-justify-content-center">
           <Loader />

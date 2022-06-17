@@ -17,7 +17,7 @@ export default class FirebaseChoozrOutputAdapter implements CreateChoozrPort, Ge
         const first = query(collection(db, "Choozr"), limit(50));
         const documentSnapshots = await getDocs(first);
 
-        return documentSnapshots.docs.map(this.snapshotsToChoozr);
+        return documentSnapshots.docs.map(this.snapshotToChoozr);
     }
 
     async createChoozrWith(choozrName: ChoozrName, loginParameters: LoginParameters): Promise<Choozr> {
@@ -35,7 +35,7 @@ export default class FirebaseChoozrOutputAdapter implements CreateChoozrPort, Ge
         );
     }
 
-    private snapshotsToChoozr = (record: QueryDocumentSnapshot): Choozr => {
+    private snapshotToChoozr = (record: QueryDocumentSnapshot): Choozr => {
         return new Choozr(
             new ChoozrId(record.id),
             new ChoozrName(record.get("name") as string),

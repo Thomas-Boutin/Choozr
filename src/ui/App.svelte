@@ -23,6 +23,8 @@
   import JoinChoozr from "./JoinChoozr.svelte";
   import Team from "./Team.svelte";
   import FirebaseChoozrOutputAdapter from "../adapter/output/FirebaseChoozrOutputAdapter";
+import FirebaseTeamOutputAdapter from "../adapter/output/FirebaseTeamOutputAdapter";
+import FirebaseMemberOutputAdapter from "../adapter/output/FirebaseMemberOutputAdapter";
 
   const routes = {
     "/": Login,
@@ -75,18 +77,18 @@
     const inMemoryLoginParamersRepository =
       new InMemoryLoginParametersRepository();
     const firebaseChoozrOutputAdapter = new FirebaseChoozrOutputAdapter();
-    const restTeamOutputAdapter = new RESTTeamOutputAdapter();
-    const restMemberOutputAdapter = new RESTMemberOutputAdapter();
+    const firebaseTeamOutputAdapter = new FirebaseTeamOutputAdapter();
+    const firebaseMemberOutputAdapter = new FirebaseMemberOutputAdapter();
     const choozrService = new ChoozrService(
       firebaseChoozrOutputAdapter,
       inMemoryLoginParamersRepository,
       firebaseChoozrOutputAdapter,
-      restTeamOutputAdapter
+      firebaseTeamOutputAdapter
     );
     const teamService = new TeamService(
-      restTeamOutputAdapter,
+      firebaseTeamOutputAdapter,
       inMemoryLoginParamersRepository,
-      restTeamOutputAdapter
+      firebaseTeamOutputAdapter
     );
 
     setContext(
@@ -102,9 +104,9 @@
     setContext(
       "joinChoozrUseCase",
       new MemberService(
-        restMemberOutputAdapter,
+        firebaseMemberOutputAdapter,
         inMemoryLoginParamersRepository,
-        restTeamOutputAdapter
+        firebaseTeamOutputAdapter
       )
     );
   }
