@@ -22,6 +22,7 @@
   import RESTMemberOutputAdapter from "../adapter/output/RESTMemberOutputAdapter";
   import JoinChoozr from "./JoinChoozr.svelte";
   import Team from "./Team.svelte";
+  import FirebaseChoozrOutputAdapter from "../adapter/output/FirebaseChoozrOutputAdapter";
 
   const routes = {
     "/": Login,
@@ -30,41 +31,83 @@
     "/choozrs/:choozrId/join": JoinChoozr,
     "/teams/:teamId": Team,
   };
-  const inMemoryLoginParamersRepository =
-    new InMemoryLoginParametersRepository();
-  const restChoozrOutputAdapter = new RESTChoozrOutputAdapter();
-  const restTeamOutputAdapter = new RESTTeamOutputAdapter();
-  const restMemberOutputAdapter = new RESTMemberOutputAdapter();
-  const choozrService = new ChoozrService(
-    restChoozrOutputAdapter,
-    inMemoryLoginParamersRepository,
-    restChoozrOutputAdapter,
-    restTeamOutputAdapter
-  );
-  const teamService = new TeamService(
-    restTeamOutputAdapter,
-    inMemoryLoginParamersRepository,
-    restTeamOutputAdapter
-  );
+  initializeFirebaseContext();
 
-  setContext(
-    "loginUseCase",
-    new AuthenticationService(inMemoryLoginParamersRepository)
-  );
-  setContext("createChoozrUseCase", choozrService);
-  setContext("getChoozrsUseCase", choozrService);
-  setContext("generateJoinChoozrURLUseCase", choozrService);
-  setContext("getChoozrTeamsUseCase", choozrService);
-  setContext("getTeamDetailsUseCase", teamService);
-  setContext("createTeamUseCase", teamService);
-  setContext(
-    "joinChoozrUseCase",
-    new MemberService(
-      restMemberOutputAdapter,
+  function initializeAirtableContext() {
+    const inMemoryLoginParamersRepository =
+      new InMemoryLoginParametersRepository();
+    const restChoozrOutputAdapter = new RESTChoozrOutputAdapter();
+    const restTeamOutputAdapter = new RESTTeamOutputAdapter();
+    const restMemberOutputAdapter = new RESTMemberOutputAdapter();
+    const choozrService = new ChoozrService(
+      restChoozrOutputAdapter,
+      inMemoryLoginParamersRepository,
+      restChoozrOutputAdapter,
+      restTeamOutputAdapter
+    );
+    const teamService = new TeamService(
+      restTeamOutputAdapter,
       inMemoryLoginParamersRepository,
       restTeamOutputAdapter
-    )
-  );
+    );
+
+    setContext(
+      "loginUseCase",
+      new AuthenticationService(inMemoryLoginParamersRepository)
+    );
+    setContext("createChoozrUseCase", choozrService);
+    setContext("getChoozrsUseCase", choozrService);
+    setContext("generateJoinChoozrURLUseCase", choozrService);
+    setContext("getChoozrTeamsUseCase", choozrService);
+    setContext("getTeamDetailsUseCase", teamService);
+    setContext("createTeamUseCase", teamService);
+    setContext(
+      "joinChoozrUseCase",
+      new MemberService(
+        restMemberOutputAdapter,
+        inMemoryLoginParamersRepository,
+        restTeamOutputAdapter
+      )
+    );
+  }
+
+  function initializeFirebaseContext() {
+    const inMemoryLoginParamersRepository =
+      new InMemoryLoginParametersRepository();
+    const firebaseChoozrOutputAdapter = new FirebaseChoozrOutputAdapter();
+    const restTeamOutputAdapter = new RESTTeamOutputAdapter();
+    const restMemberOutputAdapter = new RESTMemberOutputAdapter();
+    const choozrService = new ChoozrService(
+      firebaseChoozrOutputAdapter,
+      inMemoryLoginParamersRepository,
+      firebaseChoozrOutputAdapter,
+      restTeamOutputAdapter
+    );
+    const teamService = new TeamService(
+      restTeamOutputAdapter,
+      inMemoryLoginParamersRepository,
+      restTeamOutputAdapter
+    );
+
+    setContext(
+      "loginUseCase",
+      new AuthenticationService(inMemoryLoginParamersRepository)
+    );
+    setContext("createChoozrUseCase", choozrService);
+    setContext("getChoozrsUseCase", choozrService);
+    setContext("generateJoinChoozrURLUseCase", choozrService);
+    setContext("getChoozrTeamsUseCase", choozrService);
+    setContext("getTeamDetailsUseCase", teamService);
+    setContext("createTeamUseCase", teamService);
+    setContext(
+      "joinChoozrUseCase",
+      new MemberService(
+        restMemberOutputAdapter,
+        inMemoryLoginParamersRepository,
+        restTeamOutputAdapter
+      )
+    );
+  }
 
   async function handleRouteEvent(event: CustomEvent<RouteEventDetail>) {
     const eventDetail = event.detail;
