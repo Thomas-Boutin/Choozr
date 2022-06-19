@@ -1,22 +1,23 @@
-*Psst — looking for a more complete solution? Check out [SvelteKit](https://kit.svelte.dev), the official framework for building web applications of all sizes, with a beautiful development experience and flexible filesystem-based routing.*
+# Choozr
 
-*Looking for a shareable component template instead? You can [use SvelteKit for that as well](https://kit.svelte.dev/docs#packaging) or the older [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+Svelte app that helps generate random teams with a QrCode.
 
----
+It either connects to Airtable or Firebase. See [App.svelte](https://github.com/Thomas-Boutin/Choozr/blob/main/src/ui/App.svelte)
 
-# svelte app
+A GitHub pages website is automatically deployed to https://thomas-boutin.github.io/Choozr/
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+## Configuration
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+To use Firebase or Airtable,  call the appropriate initializer in [App.svelte]([https://github.com/Thomas-Boutin/Choozr/blob/main/src/ui/App.svelte](https://github.com/Thomas-Boutin/Choozr/blob/main/src/ui/App.svelte#L36).
 
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
+If you choose to use firebase, change the app configuration in [FirebaseInitializer.ts](https://github.com/Thomas-Boutin/Choozr/blob/main/src/adapter/output/FirebaseInitializer.ts). 
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+## Technical specifications
 
+- Hexagonal architecture
+- Typescript
+- DI with svelte context
+- Unit Testing with Jest
 
 ## Get started
 
@@ -58,52 +59,4 @@ If you're building a single-page app (SPA) with multiple routes, sirv needs to b
 
 ```js
 "start": "sirv docs --single"
-```
-
-## Using TypeScript
-
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
-
-```bash
-node scripts/setupTypeScript.js
-```
-
-Or remove the script via:
-
-```bash
-rm scripts/setupTypeScript.js
-```
-
-If you want to use `baseUrl` or `path` aliases within your `tsconfig`, you need to set up `@rollup/plugin-alias` to tell Rollup to resolve the aliases. For more info, see [this StackOverflow question](https://stackoverflow.com/questions/63427935/setup-tsconfig-path-in-svelte).
-
-## Deploying to the web
-
-### With [Vercel](https://vercel.com)
-
-Install `vercel` if you haven't already:
-
-```bash
-npm install -g vercel
-```
-
-Then, from within your project folder:
-
-```bash
-cd docs
-vercel deploy --name my-project
-```
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
 ```
